@@ -1,0 +1,11 @@
+create table salgrade(
+	grade varchar(2) not null,
+	losal number not null,
+	hisal number not null
+);
+insert into salgrade values( '1', 1000, 5000 );
+insert into salgrade values( '2', 5000, 10000 );
+insert into salgrade values( '3', 10000, 15000 );
+insert into salgrade values( '4', 15000, 20000 );
+insert into salgrade values( '5', 20000, 30000 );
+commit;

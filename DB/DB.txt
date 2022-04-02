@@ -1,0 +1,6 @@
+			서버	언어	DB
+MySQL	Linux		Apache	PHP	MySQL
+Oracle	Windows		Tomcat 	JSP	Oracle
+MSSQL	Windows			ASP	MSSQL
+
+NoSQL
