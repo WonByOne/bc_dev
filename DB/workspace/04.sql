@@ -260,18 +260,3 @@ flashback table test1 to before drop;
 select * from tabs;
 purge recyclebin; -- 휴지통 비우기
 
-
--- employee_id 가 201번인 사람이 퇴사하기 전까지
--- 같은 부서에 근무한 직원들의 
--- 사번 이름 부서 입사일을 출력한다. 
-select employee_id 사번, last_name 성, department_id 이름, hire_date 입사일
-    from employees
-    where hire_date >= (select start_date from job_history where employee_id = 201)
-        -- 입사일을 job_history 안에 있는 정보와 비교
-        and hire_date < (select end_date from job_history where employee_id = 201)
-        and department_id = 
-            (select department_id from job_history where employee_id =201)
-        and employee_id != 201;
-    
-select * from job_history;
-
