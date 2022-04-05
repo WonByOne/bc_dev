@@ -1,0 +1,9 @@
+-- Windows
+-- 루트 폴더 바꾸기
+
+설치폴더/ conf/server.xml 안의 <host> 태그 안에 
+	<Context path="" docBase="G:/My Drive/git/bc_dev/JSP/workspace/" reloadable="true"> </Context>
+혹은 context.xml의 태그에 삽입 -- 5.0 이후 권장되는 방식이라고 함
+
+원래 루트를 지우지 않으면 overide 되니 주의할 것
+
