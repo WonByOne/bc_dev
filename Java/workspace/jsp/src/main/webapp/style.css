@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+body { /* 태그별로 속성을 준다 */
+	color: #d6d6d6;
+	background-color: #000000;
+	font-family: "Times New Roman", Times, serif; /* space 있는 폰트는 "" */
+	background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),
+		url("images/love.png");
+	backdrop-filter: blur(2px);
+	background-repeat: no-repeat;
+	background-position: 100px 50px;
+	background-attachment: fixed;
+	/*background: #00ff00 url('smiley.gif') no-repeat fixed center;*/
+	/*모든 항목 넣어서 한 번에 선언 가능*/ 
+	
+}
+
+p {
+	font-size: 1.1em;
+	font-style: italic;
+	font-weight: bold;
+	
+	text-indent: 10px;
+	text-align: center;
+	text-decoration: underline overline line-through;
+	text-decoration: none;
+	text-shadow: -2px 5px gray;
+	line-height: 30px;
+	word-spacing: 10px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	color: #7d0000;
+}
+a:hover, a:active {
+	color: white;
+}
+
+#first {
+	color: #7d0000;
+}
+b#second { /*<b> 안의 second*/
+	color: #0000b9;
+}
+.point {
+	color: #ecec00;
+}
+.strong {
+	color: green;
+}
+b#second.point { /* point만 하면 id가 우선권이 있음 */
+	color: gold;
+}
+b.strong {	/* stong 클래스에 우선해서 적용 */
+	color: pink;
+}
+
+/* 두 개의 selector */
+span, b { /* or */
+	color: red;	
+}
+span b { /* 후손선택자 - 손자 이후도 포함*/ 
+	color: blue;
+}
+span > b { /* 자식선택자 - 1단계 하위까지만*/
+	color: yellow;
+}
+
+div {
+	/* border: solid 1px red; /* 한 번에 선언 가능 */
+	/* border-style: solid double; /* 위아래, 좌우 */
+	border-style: solid double dashed dotted;
+	/* top right bottom left */
+	border-width: 3px 5px;
+	border-color: red green blue yellow;
+
+	padding: 5px 10px; /* 내부 간격 */
+	margin: 5px 10px; /* 외부 간격 */
+	
+	width: 200px;
+	height: 50px;
+	
+	float: left;
+}
+
+p {
+	clear: left;
+}
+

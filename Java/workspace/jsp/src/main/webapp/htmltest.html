@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head> <!-- 설정이 들어감 -->
+<meta charset="UTF-8">
+<title>HTML</title>
+</head>
+<body background="images/c.jpg">
+	<!-- headline --> <!-- 옵션 문자열에 " ' 공백 어느것이나 허용 -->
+	<h2 align=center> Practice HTML</h2> 
+	Hello JSP!!!<br>
+	
+	<font color="#ff0000" size="+1" face="궁서체">하나<br></font> <!-- size는 상대값 가능 -->
+	둘<br>
+	셋<br>
+	하나     둘         셋<br> <!-- 공백 여러개는 1개로 인식 -->
+	하나&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;둘 셋<br> <!-- &nbsp -->
+	
+	<hr size=3 noshade color="blue" width=50% align="left">
+	<center>
+	동해물과 백두산이 마르고 닳도록 <br>
+	하느님이 보우하사 우리나라 만세 <br>
+	</center>
+	
+	<pre>	<!-- 입력한 그대로 tab까지 인식 -->
+	하나
+	둘
+	셋
+하나
+둘
+셋
+	</pre>
+	<p>
+	무궁화 삼천리 화려강산<br>
+	대한 사람 대한으로 길이 보전하세<br>
+	</p>
+	
+	<ul>
+		<li type=square>짜장면</li> <!-- 기본은 disc 채운 원 -->
+		<li type=circle>짬뽕</li>
+		<li>탕수육</li> 
+	</ul>
+	<ol>
+		<li type="A">독서</li>
+		<li>등산</li>
+		<li>운동</li>
+	</ol>
+	<dl>	<!-- 정의? 들여쓰기 됨 -->
+		<dt>애국가</dt>
+		<dd>동해물과</dd>
+	</dl>
+	
+	<img src="images/man.jpg" border=0 width=100 height=200><br>
+	<a href="https://www.daum.net">다음</a><br>
+	<a href="https://www.naver.com">네이버</a><br>
+	
+	<table border=1>
+		<tr height=50 >
+			<td width=150 colspan=3>1</td>
+		<!-- 컬럼 합치기
+			<td width=50>2</td>
+			<td width=50>3</td>
+		-->
+		</tr>
+		<tr height=50>
+			<td rowspan=2>4</td>
+			<td>5</td>
+			<td>6</td>
+		</tr>
+		<tr height=50>
+		<!-- 행 합치기
+			<td>7</td>
+		 -->
+			<td>8</td>
+			<td>9</td>
+		</tr>
+	</table><br>
+	
+	<form action=""> <!-- action은 submit 했을 때 -->
+		이름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<input type="text" name="name"><br>
+		비밀번호 :&nbsp;&nbsp;<input type="password" name="passwd"><br>
+		성별 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<input type="radio" name="gender" value=1>남자
+			 <input type="radio" name="gender" value=2>여자<br>
+		취미 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<input type="checkbox" name="hobby" value=1>독서
+			 <input type="checkbox" name="hobby" value=2>등산
+			 <input type="checkbox" name="hobby" value=3>운동<br>
+		자기소개 :&nbsp;&nbsp;<textarea name="intro" cols=50 rows=10></textarea><br>
+		주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<select name="address" size=6 multiple>
+				<option value=1>서울</option>
+				<option value=2>수원</option>
+				<option value=3>안산</option>
+				<option value=4>인천</option>
+		</select><br>
+		
+		<input type="button" value="확인">
+		<input type="reset" value="취소"> <!-- from 내부를 깨끗하게 -->
+		<input type="submit" value="전송"> <!-- action -->
+		<input type="file" value="열기"> <!-- value는 브라우저에 따라 다름 -->
+		<input type="image" src="images/ok.png">
+	</form>
+	
+	
+</body>
+</html>
