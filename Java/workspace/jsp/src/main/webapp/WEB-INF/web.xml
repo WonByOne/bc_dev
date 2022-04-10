@@ -9,4 +9,26 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+
+<servlet>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<servlet-class>study.HelloServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    	<servlet-name>HelloServlet</servlet-name>
+    	<url-pattern>/hello</url-pattern>
+    	
+  </servlet-mapping>
+  <!-- http://localhost:8080/jsp/hello 이렇게 실행하면 study.HelloServlet 실행해라 뜻  -->
+  
+  <servlet>
+  	<servlet-name>PersonServlet</servlet-name>
+  	<servlet-class>study.PersonServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    	<servlet-name>PersonServlet</servlet-name>
+    	<url-pattern>/person</url-pattern>
+  </servlet-mapping>
+  <!--  http://localhost:8080/jsp/person -->
 </web-app>
