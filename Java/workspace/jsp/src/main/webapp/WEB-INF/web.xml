@@ -31,4 +31,9 @@
     	<url-pattern>/person</url-pattern>
   </servlet-mapping>
   <!--  http://localhost:8080/jsp/person -->
+  
+  <context-param> <!-- application 내장 객체로 읽어올 수 있는 부분 -->
+  	<param-name>level</param-name>
+  	<param-value>5</param-value>
+  </context-param>
 </web-app>
