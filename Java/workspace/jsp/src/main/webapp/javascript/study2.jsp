@@ -53,6 +53,7 @@
 		document.write("</td>")
 		document.write("</tr>");
 	}
+	// 
 	
 	
 	// 결과 관련 함수
@@ -75,10 +76,10 @@
 	}
 
 	function deleteTable() {
-		location.reload();
-		//		const element = document.getElementById('tab');
-//		element.innerHTML = "";
-//		element.innerHTML = printTest(num);
+		//location.reload();
+		const element = document.getElementById('tab');
+		element.innerHTML = "";
+		element.innerHTML = printTest(num);
 	}
 	
 	
