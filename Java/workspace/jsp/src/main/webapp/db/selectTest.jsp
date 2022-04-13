@@ -1,3 +1,6 @@
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -15,17 +18,26 @@
 	ResultSet rs = null;	// DB에서 돌아온 결과값을 담는 객체
 
 	try {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+/*		
+		Class.forName("oracle.jdbc.driver.OracleDriver");	// ClassNotFoundException 발생
 		%>
 		Driver Loaded Successfully.<br>
 		<%
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";	// Oracle DB local 접속 주소
-		String dbId = "joeun";								// ID
-		String dbPasswd = "joeun";							// password
+//		String url = "jdbc:oracle:thin:@db202203302133_high?TNS_ADMIN=/wallet";
+		String dbId = "joeun";			// ID
+		String dbPasswd = "joeun";		// password
 		con = DriverManager.getConnection(url, dbId, dbPasswd);
 		%>
 		DB connected.
 		<%
+*/
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context) initCtx.lookup("java:comp/env"); // 설정 파일을 읽어와라
+		DataSource ds = (DataSource) envCtx.lookup("OCI/joeun");	// DB이름으로 가져온다
+		con = ds.getConnection();
+		
+		
 		String id = request.getParameter("id");
 		String sql = null;
 		
@@ -55,8 +67,8 @@
 		%>
 		</table>
 		<%		
-	} catch(ClassNotFoundException e) {
-		e.printStackTrace();
+/*	} catch(ClassNotFoundException e) {
+		e.printStackTrace(); 				*/
 	} catch(SQLException e) {
 		e.printStackTrace();
 	} finally {
