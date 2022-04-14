@@ -30,7 +30,8 @@
 					<th colspan=2>
 						<input type="submit" value="<%=btn_login%>">
 						<input type="reset" value="<%=btn_cancel%>">
-						<input type="button" value="<%=btn_input%>">
+						<input type="button" value="<%=btn_input%>"
+							onclick="location='inputForm.jsp'">
 					</th>
 				</tr>				
 			</table>
