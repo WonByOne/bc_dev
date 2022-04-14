@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 					<th><%=str_id%></th>
-					<td><input type="text" name="id" maxlengh=20 autofocus></td>
+					<td><input type="text" name="id" maxlength=20 autofocus></td>
 				</tr>
 				<tr>
 					<th><%=str_passwd%></th>
