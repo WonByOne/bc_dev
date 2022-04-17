@@ -7,13 +7,29 @@ var confirmstr = "Check ID avaliability."
 var emailstr = "Check E-MAIL format."
 
 var inputerror = "Failed to sign up.\nTry again after a while."
-var iderror = "No such ID. Please check ID again."
-var passwderror = "Wrong password. Please check again."
+var iderror = "No such ID.\nPlease check ID again."
+var passwderror = "Wrong password.\nPlease check again."
+var deleteerror = "Unable to delete account.\nTry again after a while."
+var modifyerror = "Unable to modify infomation.\nTry again after a while."
 
 function erroralert(msg){
 	alert(msg);
 	history.back();
 }
+
+// 회원 정보 수정
+function modifycheck() {
+	if( ! modifyform.passwd.value) {
+		alert(passwdstr);
+		modifyform.passwd.focus();
+		return false;
+	} else if(modifyform.passwd.value != modifyform.repasswd.value) {
+		alert(repasswdstr);
+		modifyform.passwd.focus();
+		return false;
+	}
+}
+
 // 로그인
 function logincheck() {
 	if(! loginform.id.value) {
@@ -23,6 +39,14 @@ function logincheck() {
 	} else if(! loginform.passwd.value) {
 		alert(passwdstr);
 		loginform.passwd.focus();
+		return false;
+	}
+}
+// 비밀번호만 확인
+function passwdchk() {
+	if(! passwdform.passwd.value) {
+		alert(passwdstr);
+		passwdform.passwd.focus();
 		return false;
 	}
 }
@@ -88,18 +112,19 @@ function inputcheck() {
 	// 이메일 // 직접입력일경우 @가 있어야 함 // 선택일 땐 @ 제외
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	// 이메일 형식을 만족하는 정규표현식 : 찾아볼 것
-	if(inputform.email_prov.value == 0) {
-		if(regEmail.test(inputform.email_id.value) == false ) {
+	if(inputform.email_id.value) {
+		if(inputform.email_prov.value == 0) {
+			if(regEmail.test(inputform.email_id.value) == false ) {
+				alert(emailstr);
+				inputform.email_id.focus();
+				return false;
+			}
+		} else if(inputform.email_id.value.indexOf("@") != -1 ) { 	// @ 있으면 에러
 			alert(emailstr);
 			inputform.email_id.focus();
 			return false;
 		}
-	} else if(inputform.email_id.value.indexOf("@") != -1 ) { 	// @ 있으면 에러
-		alert(emailstr);
-		inputform.email_id.focus();
-		return false;
 	}
-	
 }
 
 // 글자 수 채워지면 다음 입력 창으로 - 배열로 만드는 것 고려해볼 것
