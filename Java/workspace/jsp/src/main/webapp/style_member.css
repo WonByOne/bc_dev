@@ -26,13 +26,13 @@ body { /* 태그별로 속성을 준다 */
       .input { /*  */
         width: 190px;
 		height: 30px; 
+		text-align: left;
         margin: 3px 0;
+        padding-left : 12px;
      	outline: none;
-        text-align: center;
         background-color: transparent;
-	/*	border: 2px solid #181818; */
-	/*	border: 2px solid #6d6d6d; */
 		border: 2px solid #1F2023;
+		color: #EB953C;
 		font-size: 15px; 
       }
       .input:focus {
@@ -51,19 +51,32 @@ body { /* 태그별로 속성을 준다 */
       }
 
 input {
-/*	background-color: grey; */ 
-	color: #EB953C;
-	
+/*	background-color: grey; */
+	color: #d6d6d6; 
 }
+
 input::placeholder {
 	/* color: #EB953C; */
 }
+	.readonly { /*  */
+	        width: 190px;
+			height: 30px; 
+			text-align: left;
+	        margin: 3px 0;
+	        padding-left : 12px;
+	     	outline: none;
+	        background-color: transparent;
+			border: 2px solid #1F2023;
+			font-size: 15px; 
+	}
+
 	.tel {
 		width: 55px;
 	}
 	
 	.ssn {
 		width: 89px;
+		
 	}
 	.email {
 		width: 100px;
@@ -71,15 +84,19 @@ input::placeholder {
 	.button {
 		background-color: transparent;
 		border-color: #1F2023;
+		color: #EB953C;
 	}
+	
 select {
 	background-color: transparent;
 	border-color: #1F2023;
 	outline: none;
 	color: #EB953C;
 }
+option {
+	background: black;
+}
 	
-
 table, th, td {
 	border: 1px solid #d6d6d6;
 	border-radius: 5px;
