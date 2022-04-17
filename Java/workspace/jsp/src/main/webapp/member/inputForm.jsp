@@ -44,7 +44,7 @@
 				class="input email" placeholder="<%=str_email%>">
 				@
 				<select name="email_prov">
-					<option value=0>직접 입력</option>
+					<option value=0>입력</option>
 					<option value="naver.com">Naver</option>
 					<option value="daum.net">Daum</option>
 					<option value="gmail.com">GMail</option>
