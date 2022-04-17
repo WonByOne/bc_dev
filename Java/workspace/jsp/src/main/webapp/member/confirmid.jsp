@@ -6,8 +6,6 @@
 <link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>    
 
-<h2><%=page_confirm%></h2>
-
 <%
 	String id = request.getParameter("id"); 
 %>
@@ -16,44 +14,30 @@
 	int result = dao.checkid(id);
 	if(result == 0) {	// id 없음
 		%>
-			<table border=1>
-				<tr>
-					<th>
-						<%=id%><%=msg_id_able%>
-					</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" value="<%=btn_ok%>"
-							onclick="setid('<%=id%>')">
-					</td>
-				</tr>
-			</table>
+		<div class="container">
+			<h3><%=page_confirm%></h3>	
+			<%=id%><%=msg_id_able%>
+			<input type="button" value="<%=btn_ok%>" onclick="setid('<%=id%>')"
+				class=button>
+		</div>
 		<%
 	} else { 			// id 중복
 		%>
 		<form name="confirmidform" method="post" action="confirmid.jsp"
 			onsubmit="return confirmidwin()">
-			<table border=1>
-				<tr>
-					<th colspan=2>
-						<span><%=id%></span><%=msg_id_unable%>
-					</th>
-				</tr>
-				<tr>
-					<th><%=str_id%></th>
-					<td><input type="text" name="id" maxlength=20 autofocus
-						class="input" placeholder="id"></td>
-				</tr>
-				<tr>
-					<th colspan=2>
-						<input type="submit" value="<%=btn_confirm%>">
-						<input type="button" value="<%=btn_cancel%>"
-							onclick="window.close()">
-					</th>
-				</tr>
-			</table>
-
+			<div class="container">
+				<div class="wrap">
+					<%=id%> <%=msg_id_unable%>
+				</div>
+					<input type="text" name="id" maxlength=20 autofocus
+						class="input" placeholder="<%=str_id%>">
+				<div class="wrap">
+					<input type="submit" value="<%=btn_confirm%>"
+						class="button">
+					<input type="button" value="<%=btn_cancel%>"
+						onclick="window.close()" class="button">
+				</div>
+			</div>
 		</form>
 		<%
 	}
