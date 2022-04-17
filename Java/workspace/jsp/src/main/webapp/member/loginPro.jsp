@@ -13,7 +13,7 @@
 %>
 <%
 	LogonDBBean dao = LogonDBBean.getInstance();
-	int result = dao.check(id, passwd);
+	int result = dao.checkid(id, passwd);
 	if(result == -1) {		// id not found 
 		%>
 		<script type="text/javascript">
@@ -31,6 +31,7 @@
 			</script>
 			<%
 	} else {				// right password
+		session.setAttribute("memid", id); // db에서 가져온 id를 memid에 넣는다
 		response.sendRedirect("main.jsp");
 	}
 %>
