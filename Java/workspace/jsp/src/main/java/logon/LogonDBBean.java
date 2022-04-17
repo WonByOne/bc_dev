@@ -57,6 +57,36 @@ public class LogonDBBean {
 		return result;
 	}
 	
+	public int modifyMember(LogonDataBean dto) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			String sql =
+					"update member set passwd=?, tel=?, email=? where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getPasswd());
+			pstmt.setString(2, dto.getTel());
+			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getId());
+			result = pstmt.executeUpdate();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close(); 
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	
 	public int checkid(String id) {
 		int result = 0;
 		Connection con = null;
@@ -73,7 +103,6 @@ public class LogonDBBean {
 			} else {		// id 없음
 				result = 0;
 			}
-			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -87,7 +116,108 @@ public class LogonDBBean {
 				e.printStackTrace();
 			}
 		}
+		return result;	
+	}
+	
+	public int checkid(String id, String passwd) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			String sql = "select * from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // id found
+				if(passwd.equals(rs.getString("passwd"))) {
+					result = 1;
+				} else {
+					result = 0;
+				}
+			} else { // id not found
+				result = -1;
+			}		
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return result;
 	}
 	
+	public int deleteMember(String id) {	// id 받아옴
+		int result = 0;						// 리턴값
+		Connection con = null;
+		PreparedStatement pstmt = null;	
+		try {
+			con = getConnection();
+			// 해당 id 삭제 sql
+			String sql = "delete from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate(); // sql 수행 		
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	// id 받아서 꺼내기
+	public LogonDataBean getMember(String id) {
+		LogonDataBean dto = null; // 참조변수일 뿐: 객체 생성 필요
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			String sql = "select * from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {	// DB에서 가져온 data
+				dto = new LogonDataBean();
+				dto.setId(rs.getString("id"));
+				dto.setPasswd(rs.getString("passwd"));
+				dto.setName(rs.getString("name"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setSsn(rs.getString("ssn"));
+				dto.setTel(rs.getString("tel"));
+				dto.setEmail(rs.getString("email"));
+				dto.setReg_date(rs.getTimestamp("reg_date"));
+			}
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
 } // class
