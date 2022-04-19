@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -144,4 +145,161 @@ public class BoardDBBean {
 		}
 		return result;
 	}
+	
+	public ArrayList<BoardDataBean> getArticles(int start, int end) {
+		ArrayList<BoardDataBean> dtos = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			// 전체글 정렬 후 표시할 값만 가져온다
+			String sql = "select num,writer,email,subject,passwd,";
+			sql+= "reg_date,ref,re_step,re_level,content,ip,readcount,r ";
+			sql+= "from (select num,writer,email,subject,passwd,reg_date,ref,re_step";
+			sql+= ",re_level,content,ip,readcount,rownum r from ";
+			sql+= "(select num,writer,email,subject,passwd,reg_date,ref,re_step,re_level ";
+			sql+= ",content,ip,readcount from board order by ref desc, re_step asc) ";
+			sql+= "order by ref desc, re_step asc ) where r >= ? and r <= ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dtos = new ArrayList<BoardDataBean>();
+				do {
+					BoardDataBean dto = new BoardDataBean();
+					dto.setNum(rs.getInt("num"));
+					dto.setWriter(rs.getString("writer"));
+					dto.setEmail(rs.getString("email"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setPasswd(rs.getString("passwd"));
+					dto.setReg_date(rs.getTimestamp("reg_date"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setRef(rs.getInt("ref"));
+					dto.setRe_step(rs.getInt("re_step"));
+					dto.setRe_level(rs.getInt("re_level"));
+					dto.setContent(rs.getString("content"));
+					dto.setIp(rs.getString("ip"));
+					
+					dtos.add(dto);
+				} while(rs.next());
+			}
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+	
+	public BoardDataBean getArticle(int num) {
+		BoardDataBean dto = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			String sql = "select * from board where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new BoardDataBean();
+				dto.setNum(rs.getInt("num"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setEmail(rs.getString("email"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setPasswd(rs.getString("passwd"));
+				dto.setReg_date(rs.getTimestamp("reg_date"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setRef(rs.getInt("ref"));
+				dto.setRe_step(rs.getInt("re_step"));
+				dto.setRe_level(rs.getInt("re_level"));
+				dto.setContent(rs.getString("content"));
+				dto.setIp(rs.getString("ip"));
+			}
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
+	public void addCount(int num) {	// 조회수 증가
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			String sql = "update board set readcount=readcount+1 where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public int checkDel(int num, String passwd) {
+		int result = 0;
+		BoardDataBean dto = getArticle(num);
+		if(passwd.equals(dto.getPasswd())) {
+			result = 1;
+		} 
+		return result;
+	}
+	
+	public int deleteArticle(int num) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			String sql = "delete from board where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 } // class
