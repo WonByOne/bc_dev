@@ -19,7 +19,7 @@
 	<!-- hidden 속성으로 4항목 받음 -->
 <%
 	dto.setReg_date(new Timestamp(System.currentTimeMillis()));
-	dto.setIp(request.getRemoteAddr());
+	dto.setIp(request.getRemoteAddr());		// eclipse default ipv6로 가져옴
 %>
 <%
 	BoardDBBean dao = BoardDBBean.getInstance();
