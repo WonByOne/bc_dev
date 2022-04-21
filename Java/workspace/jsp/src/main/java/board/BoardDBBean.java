@@ -268,7 +268,7 @@ public class BoardDBBean {
 			}
 		}
 	}
-	public int checkDel(int num, String passwd) {
+	public int check(int num, String passwd) {
 		int result = 0;
 		BoardDataBean dto = getArticle(num);
 		if(passwd.equals(dto.getPasswd())) {
@@ -281,11 +281,78 @@ public class BoardDBBean {
 		int result = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;	// 답글 여부 확인용
 		try {
 			con = getConnection();
-			String sql = "delete from board where num=?";
+			String sql = "select * from board where ref=? and re_step=?+1 "
+						+"and re_level>?";
+			BoardDataBean dto = getArticle(num);
+ 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getRef());
+			pstmt.setInt(2, dto.getRe_step());
+			pstmt.setInt(3, dto.getRe_level());
+			rs = pstmt.executeQuery();
+			/*				ref	re_step	re_level		
+			 * 	제목 			10	0		0
+			 * 	ㄴ 답글 		10	2		1
+			 *		ㄴ 재답글	10	3		2
+			 * 	ㄴ 나중 답글 	10	1		1
+			 * 
+			 * 	ref 같아야함 
+			 * 	re_step 1만 커야함 : 나중 답글에 먼저 답글이 지워질 수 있음 
+			 * 	re_level 은 작아야함
+			 */
+			if(rs.next()) { // 답글 있음 
+				if(pstmt != null) pstmt.close();
+				sql = "update board set subject='Deleted article.', "
+					+"readcount=-1 where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				result = pstmt.executeUpdate();
+			} else { // 답글 없음
+				if(pstmt != null) pstmt.close();
+				sql = "update board set re_step=re_step-1 "
+					+ "where ref=? and re_step>?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, dto.getRef());
+				pstmt.setInt(2, dto.getRe_step());
+				pstmt.executeUpdate();
+				if(pstmt != null) pstmt.close();
+				sql = "delete from board where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				result = pstmt.executeUpdate();				
+			}
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int modifyArticle(BoardDataBean dto) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			String sql = "update board set email=?, subject=?, content=?, passwd=? where num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, dto.getEmail());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getPasswd());
+			pstmt.setInt(5, dto.getNum());
+			
 			result = pstmt.executeUpdate();
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -301,5 +368,4 @@ public class BoardDBBean {
 		}
 		return result;
 	}
-	
 } // class
