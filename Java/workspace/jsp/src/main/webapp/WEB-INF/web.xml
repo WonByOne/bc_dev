@@ -47,4 +47,18 @@
   	<location>/error/500code.jsp</location>
   </error-page>
    -->
+   
+   <servlet>
+   		<servlet-name>SimpleController</servlet-name> <!-- 보통 Class 이름과 같이 준다 -->
+   		<servlet-class>mvc.SimpleController</servlet-class>
+   		<init-param> <!-- 서블릿 실행될 때 읽어들일 파일 -->
+   			<param-name>configFile</param-name>
+   			<param-value>WEB-INF/handler.properties</param-value>
+   		</init-param>
+   </servlet>
+   <servlet-mapping>
+   		<servlet-name>SimpleController</servlet-name>
+<!-- 	<url-pattern>/simple</url-pattern> 주소방식 -->
+   		<url-pattern>*.do</url-pattern>
+   </servlet-mapping>
 </web-app>
