@@ -13,7 +13,7 @@
 %>
 <%
 	BoardDBBean dao = BoardDBBean.getInstance();
-	int result = dao.checkDel(num, passwd);
+	int result = dao.check(num, passwd);
 	if(result == 0) { 	// wrong password
 		%>
 		<script type="text/javascript">
