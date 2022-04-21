@@ -91,10 +91,20 @@
 								<%
 							}
 						%>
-						<!-- 제목 클릭할 경우 글 번호와 페이지 번호가 같이 전달되도록 -->
-						<a href="content.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>&number=<%=number+1%>">  
-							<%=dto.getSubject()%>
-						</a>
+						<%
+							if(dto.getReadcount() == -1) {
+								%>
+								<%=dto.getSubject()%>
+								<%
+							} else {
+								%>
+				<!-- 제목 클릭할 경우 글 번호와 페이지 번호가 같이 전달되도록 -->
+								<a href="content.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>&number=<%=number+1%>">  
+									<%=dto.getSubject()%>
+								</a>
+							<%
+							}
+						 	%>		
 					</td>
 					<td align="center">
 						<%=dto.getWriter()%>
@@ -106,7 +116,15 @@
 						<%=sdf.format(dto.getReg_date())%>
 					</td>
 					<td align="center">
-						<%=dto.getReadcount()%>
+						<%
+						if(dto.getReadcount() == -1) {
+							%>0<%
+						} else {	
+							%>
+							<%=dto.getReadcount()%>
+							<%
+						}
+						%>
 					</td>
 					<td align="center">
 						<%=dto.getIp()%>
