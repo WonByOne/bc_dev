@@ -26,7 +26,8 @@
 		<tr>
 			<th colspan=2>
 				<input class="inputbutton" type="submit" value="<%=btn_delete%>">
-				<input class="inputbutton" type="button" value="<%=btn_cancel%>">
+				<input class="inputbutton" type="button" value="<%=btn_cancel%>"
+					onclick="location='list.jsp?pageNum=<%=pageNum%>'">
 			</th>
 		</tr>
 	</table>
