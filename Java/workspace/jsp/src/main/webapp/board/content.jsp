@@ -53,8 +53,9 @@
 		<!-- 글 내용을 줄바꿈하기 위해서 -->
 	</tr>
 	<tr>
-		<th colspan=4>
-			<input class="inputbutton" type="button" value="<%=btn_modify%>">
+		<th colspan=4> <!--  수정과 삭제 처리 후 보던 리스트로 돌아오기 위해 pageNum -->
+			<input class="inputbutton" type="button" value="<%=btn_modify%>"
+				onclick="location='modifyForm.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
 			<input class="inputbutton" type="button" value="<%=btn_delete%>"
 				onclick="location='deleteForm.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
 			<input class="inputbutton" type="button" value="<%=btn_reply%>"
