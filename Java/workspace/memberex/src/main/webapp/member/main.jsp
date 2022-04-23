@@ -2,15 +2,13 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="setting.jsp"%>
-<link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
+<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>
-
-
     
  <%
  	if(session.getAttribute("memid") == null) { // logout
  		%>
- 		<form name="mainform" method="post" action="loginPro.jsp"
+ 		<form name="mainform" method="post" action="loginPro.do"
  			onsubmit="return maincheck()">	<%-- 로그인 처리 페이지 --%>
 			<div class="container">
 				<h3><%=page_main%></h3>
@@ -24,7 +22,7 @@
 					<input type="submit" value="<%=btn_login%>" class="button">
 					<input type="reset" value="<%=btn_cancel%>" class="button">
 					<input type="button" value="<%=btn_input%>"							
-						onclick="location='inputForm.jsp'" class="button">
+						onclick="location='inputForm.do'" class="button">
 				</div>
 			</div>
  		</form>
@@ -37,11 +35,11 @@
  			<%=msg_main%><%=session.getAttribute("memid")%>!
  			<div class="wrap">
  			 	<input type="button" value="<%=btn_modify%>"
- 			 		onclick="location='modifyForm.jsp'" class="button">
+ 			 		onclick="location='modifyForm.do'" class="button">
  				<input type="button" value="<%=btn_del%>" 
- 					onclick="location='deleteForm.jsp'" class="button">
+ 					onclick="location='deleteForm.do'" class="button">
  				<input type="button" value="<%=btn_logout%>"
- 					onclick="location='logout.jsp'" class="button">
+ 					onclick="location='logout.do'" class="button">
  			</div>
  		</div>
  		<%

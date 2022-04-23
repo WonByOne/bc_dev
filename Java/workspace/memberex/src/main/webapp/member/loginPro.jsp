@@ -8,12 +8,10 @@
 <h2><%=page_login%></h2>
 
 <%
-	String id = request.getParameter("id");
-	String passwd = request.getParameter("passwd");
+	int result = (Integer) request.getAttribute("result");
+	String id = (String) request.getAttribute("id");
 %>
 <%
-	LogonDBBean dao = LogonDBBean.getInstance();
-	int result = dao.checkid(id, passwd);
 	if(result == -1) {		// id not found 
 		%>
 		<script type="text/javascript">
@@ -32,6 +30,6 @@
 			<%
 	} else {				// right password
 		session.setAttribute("memid", id); // db에서 가져온 id를 memid에 넣는다
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("main.do");
 	}
 %>

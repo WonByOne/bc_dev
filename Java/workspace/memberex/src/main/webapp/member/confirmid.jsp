@@ -1,17 +1,15 @@
-<%@page import="logon.LogonDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ include file="setting.jsp"%>
-<link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
+<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>    
 
-<%
-	String id = request.getParameter("id"); 
+<%	// handler로부터 가져오는 변수
+	int result = (Integer) request.getAttribute("result");
+	String id = (String) request.getAttribute("id");
 %>
 <%
-	LogonDBBean dao = LogonDBBean.getInstance();
-	int result = dao.checkid(id);
 	if(result == 0) {	// id 없음
 		%>
 		<div class="container">
@@ -23,7 +21,7 @@
 		<%
 	} else { 			// id 중복
 		%>
-		<form name="confirmidform" method="post" action="confirmid.jsp"
+		<form name="confirmidform" method="post" action="confirmid.do"
 			onsubmit="return confirmidwin()">
 			<div class="container">
 				<div class="wrap">

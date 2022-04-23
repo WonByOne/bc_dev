@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="setting.jsp"%>
-<link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
+<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>
 
 
 
-<form name="inputform" method="post" action="inputPro.jsp"
+<form name="inputform" method="post" action="inputPro.do"
 	onsubmit="return inputcheck()">
 	<input type="hidden" name="confirm" value=0> <!-- html에서 변수처럼 사용: 중복확인-->
 	
@@ -55,7 +55,7 @@
 			<input type="submit" value="<%=btn_input%>" class="button">
 			<input type="reset" value="<%=btn_cancel%>" class="button">
 			<input type="button" value="<%=btn_home%>"
-				onclick="location='main.jsp'" class="button">
+				onclick="location='main.do'" class="button">
 		</div>
 	</div>
 </form>

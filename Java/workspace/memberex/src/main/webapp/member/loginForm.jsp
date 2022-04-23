@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="setting.jsp"%>
-<link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
+<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>
 
 
 
-<form name="loginform" method="post" action="loginPro.jsp"
+<form name="loginform" method="post" action="loginPro.do"
 	onsubmit="return logincheck()">
 	<div class="container">
 		<h2><%=page_login%> </h2>		

@@ -2,7 +2,4 @@
     pageEncoding="UTF-8"%>
 
 <%-- 세션을 지우고 메인으로 간다 --%>
-<%
-	session.removeAttribute("memid"); 
-	response.sendRedirect("main.jsp");
-%>
+<%-- handler로 옯김 필요없는 파일이 됨 --%>

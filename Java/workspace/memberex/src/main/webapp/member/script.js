@@ -51,14 +51,13 @@ function passwdchk() {
 	}
 }
 
-
 //  중복 확인
 function confirmid() {
 	if(! inputform.id.value) {
 		alert(idstr);
 		inputform.id.focus();
 	} else {
-		url = "confirmid.jsp?id="+inputform.id.value;
+		url = "confirmid.do?id="+inputform.id.value;
 		open(url, "confirm", "scrollbar=no, menubar=no, status=no, width=450, height=200");
 	}
 }
@@ -76,8 +75,6 @@ function setid(id) {
 	window.close();
 	opener.document.inputform.confirm.value = 1;
 }
-
-
 
 // Sign in Page
 function inputcheck() {

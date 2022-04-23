@@ -1,23 +1,13 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="logon.LogonDataBean"%>
-<%@page import="logon.LogonDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ include file="setting.jsp"%>
-<link href="/jsp/style_member.css" rel="stylesheet" type="text/css">
+<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>/script.js"></script>
-
 <%
-	String id = (String) session.getAttribute("memid");
-	String passwd = request.getParameter("passwd");
-%>
-<%
-	// 패스워드 공란이면???
-%>
-<%
-	LogonDBBean dao = LogonDBBean.getInstance();
-	int result = dao.checkid(id, passwd);	// 세션의 ID 사용
+	int result = (Integer) request.getAttribute("result");
 %>
 <%
 	if(result == 0) { // wrong password
@@ -29,9 +19,9 @@
 		</script>
 		<%
 	} else { // correct password
-		LogonDataBean dto = dao.getMember(id); // id에 따른 정보를 받아온다.
+		LogonDataBean dto = (LogonDataBean) request.getAttribute("dto");
 		%>
-		<form name="modifyform" method="post" action="modifyPro.jsp"
+		<form name="modifyform" method="post" action="modifyPro.do"
 			onsubmit="return modifycheck()">
 			<div class="container">
 				<h3><%=page_modify%></h3>
@@ -111,7 +101,7 @@
 					<input type="submit" value="<%=btn_modify%>" class="button">
 					<input type="reset" value="<%=btn_cancel%>" class="button">
 					<input type="button" value="<%=btn_home%>"
-						onclick="location='main.jsp'" class="button">				
+						onclick="location='main.do'" class="button">				
 				</div>
 			</div>
 		</form>
