@@ -10,17 +10,10 @@
 
 <h2><%=page_content%></h2>
 
-<%
-	int num = Integer.parseInt(request.getParameter("num"));
-	String pageNum = request.getParameter("pageNum");
-	int number = Integer.parseInt(request.getParameter("number"));	// 리스트에 보이는 글번호
-%>
-<%
-	BoardDBBean dao = BoardDBBean.getInstance();
-	BoardDataBean dto = dao.getArticle(num);
-	if(! request.getRemoteAddr().equals(dto.getIp())) {	// 다른 사람의 글을 읽었을 때
-		dao.addCount(num);		// 조회 수 증가 	
-	}
+<%	// 핸들러에서 넘어온 변수
+	int number = (Integer) request.getAttribute("number");
+	String pageNum = (String) request.getAttribute("pageNum");
+	BoardDataBean dto = (BoardDataBean) request.getAttribute("dto");
 %>
 <table>
 	<tr align="center">
@@ -55,13 +48,13 @@
 	<tr>
 		<th colspan=4> <!--  수정과 삭제 처리 후 보던 리스트로 돌아오기 위해 pageNum -->
 			<input class="inputbutton" type="button" value="<%=btn_modify%>"
-				onclick="location='modifyForm.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
+				onclick="location='modifyForm.do?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
 			<input class="inputbutton" type="button" value="<%=btn_delete%>"
-				onclick="location='deleteForm.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
+				onclick="location='deleteForm.do?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>'">
 			<input class="inputbutton" type="button" value="<%=btn_reply%>"
-				onclick="location='writeForm.jsp?num=<%=dto.getNum()%>&ref=<%=dto.getRef()%>&re_step=<%=dto.getRe_step()%>&re_level=<%=dto.getRe_level()%>'">
+				onclick="location='writeForm.do?num=<%=dto.getNum()%>&ref=<%=dto.getRef()%>&re_step=<%=dto.getRe_step()%>&re_level=<%=dto.getRe_level()%>'">
 			<input class="inputbutton" type="button" value="<%=btn_list%>"
-				onclick="location='list.jsp?pageNum=<%=pageNum%>'">
+				onclick="location='list.do?pageNum=<%=pageNum%>'">
 		</th>
 	</tr>
 </table>

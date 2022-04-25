@@ -6,15 +6,13 @@
 <script src="<%=project%>/script.js"></script>
 
 <h2><%=page_delete%></h2>
+
 <%
-	int num = Integer.parseInt(request.getParameter("num"));
-	String pageNum = request.getParameter("pageNum");
-	String passwd = request.getParameter("passwd");
+	String pageNum = (String) request.getAttribute("pageNum");
+	int resultCheck = (Integer) request.getAttribute("resultCheck");
 %>
 <%
-	BoardDBBean dao = BoardDBBean.getInstance();
-	int result = dao.check(num, passwd);
-	if(result == 0) { 	// wrong password
+	if(resultCheck == 0) { 	// wrong password
 		%>
 		<script type="text/javascript">
 		/*<![CDATA[*/
@@ -23,7 +21,7 @@
 		</script>
 		<%
 	} else { 			// correct password
-		result = dao.deleteArticle(num);
+		int result = (Integer) request.getAttribute("result");
 		if(result == 0) {
 			%>
 			<script type ="text/javascript">
@@ -31,10 +29,10 @@
 				alert(deleteerror);
 			/*]]>*/	
 			</script>
-			<meta http-equiv="refresh" content="0; url=list.jsp?pageNum=<%=pageNum%>">
+			<meta http-equiv="refresh" content="0; url=list.do?pageNum=<%=pageNum%>">
 			<%
 		} else {
-			response.sendRedirect("list.jsp?pageNum=" + pageNum);
+			response.sendRedirect("list.do?pageNum=" + pageNum);
 		}
 	}
 %>

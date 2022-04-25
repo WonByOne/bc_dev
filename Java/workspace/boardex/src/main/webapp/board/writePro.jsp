@@ -9,21 +9,9 @@
 <h2><%=page_write%></h2>
 
 <%
-	request.setCharacterEncoding("utf-8");
-%>
-<jsp:useBean id="dto" class="board.BoardDataBean"/>
-	<jsp:setProperty name="dto" property="*"/>
-	<!-- writer email subject content passwd -->
-	<!-- DB 테이블 컬럼과 이름이 같은 것만 받아온다 -->
-	<!-- num ref re_step re_level -->
-	<!-- hidden 속성으로 4항목 받음 -->
-<%
-	dto.setReg_date(new Timestamp(System.currentTimeMillis()));
-	dto.setIp(request.getRemoteAddr());		// eclipse default ipv6로 가져옴
+	int result = (Integer) request.getAttribute("result");
 %>
 <%
-	BoardDBBean dao = BoardDBBean.getInstance();
-	int result = dao.insertArticle(dto);
 	if(result == 0) {
 		%>
 		<script type="text/javascript">
@@ -33,6 +21,6 @@
 		</script>
 		<%
 	} else {
-		response.sendRedirect("list.jsp");
+		response.sendRedirect("list.do");
 	}
 %>

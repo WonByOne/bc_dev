@@ -8,10 +8,10 @@
 <h2><%=page_modify%></h2>
 
 <%
-	int num = Integer.parseInt(request.getParameter("num"));
-	String pageNum = request.getParameter("pageNum");
+	int num = (Integer) request.getAttribute("num");
+	String pageNum = (String) request.getAttribute("pageNum");
 %>
-<form name="passwordform" method="post" action="modifyView.jsp">
+<form name="passwordform" method="post" action="modifyView.do">
 	<input type="hidden" name="num" value="<%=num%>">
 	<input type="hidden" name="pageNum" value="<%=pageNum%>">
 	<table>
@@ -28,7 +28,7 @@
 			<th colspan=2>
 				<input class="inputbutton" type="submit" value="<%=btn_modify%>">
 				<input class="inputbutton" type="button" value="<%=btn_cancel%>"
-					onclick="location='list.jsp?pageNum=<%=pageNum%>'">
+					onclick="location='list.do?pageNum=<%=pageNum%>'">
 			</th>
 		</tr>
 	</table>

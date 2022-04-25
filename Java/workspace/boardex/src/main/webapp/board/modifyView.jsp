@@ -10,13 +10,11 @@
 <h2><%=page_modify%></h2>
 
 <%
-	int num = Integer.parseInt(request.getParameter("num"));
-	String pageNum = request.getParameter("pageNum");
-	String passwd = request.getParameter("passwd");
+	int num = (Integer) request.getAttribute("num");
+	String pageNum = (String) request.getAttribute("pageNum");
+	int result = (Integer) request.getAttribute("result");
 %>
 <%
-	BoardDBBean dao = BoardDBBean.getInstance();
-	int result = dao.check(num, passwd);
 	if(result == 0) { // wrong passwd
 		%>
 		<script type="text/javascript">
@@ -26,9 +24,9 @@
 		</script>
 		<%
 	} else {		// correct paswd
-		BoardDataBean dto = dao.getArticle(num);
+		BoardDataBean dto = (BoardDataBean) request.getAttribute("dto"); // dto 받기
 		%>
-		<form name="modifyform" method="post" action="modifyPro.jsp"
+		<form name="modifyform" method="post" action="modifyPro.do"
 			onsubmit="return modifycheck()">
 			<input type="hidden" name="num" value="<%=num%>">
 			<input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -85,7 +83,7 @@
 						<input class="inputbutton" type="submit" value="<%=btn_modify%>">
 						<input class="inputbutton" type="reset" value="<%=btn_cancel%>">
 						<input class="inputbutton" type="button" value="<%=btn_mod_cancel%>"
-							onclick="location='list.jsp?pageNum=<%=pageNum%>'">
+							onclick="location='list.do?pageNum=<%=pageNum%>'">
 					</th>
 				</tr>
 			</table>

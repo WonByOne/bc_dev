@@ -8,20 +8,13 @@
 <h2><%=page_write%></h2>
 
 <%
-	int num = 0;	// 주제글 답변글 구분
-	int ref = 1;	// 그룹화 아이디
-	int re_step = 0;	// 글 순서
-	int re_level = 0;	// 글 레벨
-	
-	if(request.getParameter("num") != null) { // 답변글인 경우
-		num = Integer.parseInt(request.getParameter("num"));
-		ref = Integer.parseInt(request.getParameter("ref"));
-		re_step = Integer.parseInt(request.getParameter("re_step"));
-		re_level = Integer.parseInt(request.getParameter("re_level"));
-	}
+	int num = (Integer) request.getAttribute("num");
+	int ref = (Integer) request.getAttribute("ref");
+	int re_step = (Integer) request.getAttribute("re_step");
+	int re_level = (Integer) request.getAttribute("re_level");
 %>
 
-<form name="writeform" method="post" action="writePro.jsp"
+<form name="writeform" method="post" action="writePro.do"
 	onsubmit="return writecheck()">
 	<input type="hidden" name="num" value="<%=num%>">
 	<input type="hidden" name="ref" value="<%=ref%>">
@@ -31,7 +24,7 @@
 	<table>
 		<tr>
 			<th colspan=2 style="text-align:right">
-				<a href="list.jsp"><%=str_list%></a>&nbsp;&nbsp;&nbsp;
+				<a href="list.do"><%=str_list%></a>&nbsp;&nbsp;&nbsp;
 			</th>
 		</tr>
 		<tr>
@@ -59,7 +52,7 @@
 				<input class="inputbutton" type="submit" value="<%=btn_write%>">
 				<input class="inputbutton" type="reset" value="<%=btn_cancel%>">
 				<input class="inputbutton" type="button" value="<%=btn_list%>"
-					onclick="location='list.jsp'">
+					onclick="location='list.do'">
 			</th>
 		</tr>
 	</table>

@@ -7,18 +7,10 @@
 
 <h2><%=page_modify%></h2>
 <%
-	request.setCharacterEncoding("utf-8");
-%>
-<jsp:useBean id="dto" class="board.BoardDataBean"/>
-	<jsp:setProperty name="dto" property="*"/>
-	<!-- num email subject content passwd -->
-<%
-	String pageNum = request.getParameter("pageNum"); // pageNum은 바구니 DTO에 없
+	String pageNum = (String) request.getAttribute("pageNum");
+	int result = (Integer) request.getAttribute("result");
 %>
 <%
-	BoardDBBean dao = BoardDBBean.getInstance();
-	int result = dao.modifyArticle(dto);
-	
 	if(result == 0) {
 		%>
 		<script type="text/javascript">
@@ -28,6 +20,6 @@
 		</script>
 		<%
 	} else {
-		response.sendRedirect("list.jsp?pageNum="+pageNum);
+		response.sendRedirect("list.do?pageNum="+pageNum);
 	}
 %>
