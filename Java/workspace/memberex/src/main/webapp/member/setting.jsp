@@ -1,40 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-	String project = "/memberex/member";
+<c:set var="project" value="/memberex/member"/>
 
-	String msg_input = "Sign up please.";
-	String msg_id_unable = " is not available.";
-	String msg_id_able = " is available.";
-	String msg_login = "Please Login.";
-	String msg_main = "Hello, ";
-	String msg_passwd = "Enter password.";
-	String msg_modify = "Enter your modification.";
+<c:set var="msg_input" value="Sign up please."/>
+<c:set var="msg_id_unable" value=" is not available."/>
+<c:set var="msg_id_able" value=" is available."/>
+<c:set var="msg_login" value="Please Login."/>
+<c:set var="msg_main" value="Hello, "/>
+<c:set var="msg_passwd" value="Enter password."/>
+<c:set var="msg_modify" value="Enter your modification."/>
 	
-	String page_login = "Sign In";
-	String page_main = "Main Page";
-	String page_input = "Sign Up";
-	String page_confirm = "ID Confirm";
-	String page_del = "Delete Account";
-	String page_modify ="Modifiy Information";
+<c:set var="page_login" value="Sign In"/>
+<c:set var="page_main" value="Main Page"/>
+<c:set var="page_input" value="Sign Up"/>
+<c:set var="page_confirm" value="ID Confirm"/>
+<c:set var="page_del" value="Delete Account"/>
+<c:set var="page_modify" value="Modifiy Information"/>
 	
-	String str_id = "ID";
-	String str_passwd ="PASSWORD";
-	String str_name = "NAME";
-	String str_fullssn ="RRN";
-	String str_tel="TEL";
-	String str_email="E-MAIL";
-	String str_reg_date = "가입일";
+<c:set var="str_id" value="ID"/>
+<c:set var="str_passwd" value="PASSWORD"/>
+<c:set var="str_name" value="NAME"/>
+<c:set var="str_fullssn" value="RRN"/>
+<c:set var="str_tel" value="TEL"/>
+<c:set var="str_email" value="E-MAIL"/>
+<c:set var="str_reg_date" value="가입일"/>
 	
-	String btn_login = "Login";
-	String btn_cancel = "Cancel";
-	String btn_input = "Sign Up";
-	String btn_home = "Home";
-	String btn_confirm = "ID Confirm";
-	String btn_ok = "Confirm";
-	String btn_modify = "Modify";
-	String btn_del = "Delete Account";
-	String btn_logout = "Log Out";
-	// String btn_modify_cancel= "수정 취소";
-%>
+<c:set var="btn_login" value="Login"/>
+<c:set var="btn_cancel" value="Cancel"/>
+<c:set var="btn_input" value="Sign Up"/>
+<c:set var="btn_home" value="Home"/>
+<c:set var="btn_confirm" value="ID Confirm"/>
+<c:set var="btn_ok" value="Confirm"/>
+<c:set var="btn_modify" value="Modify"/>
+<c:set var="btn_del" value="Delete Account"/>
+<c:set var="btn_logout" value="Log Out"/>
+
+<!--	// String btn_modify_cancel= "수정 취소"/> -->

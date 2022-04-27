@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="setting.jsp"%>
-<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
-<script src="<%=project%>/script.js"></script>
+<link href="${project}/style_member.css" rel="stylesheet" type="text/css">
+<script src="${project}/script.js"></script>
 
 
 
@@ -13,18 +13,18 @@
 	
 	<div class="container">
 		<div class="wrap">
-			<h3> <%=page_input%></h3>
-			<input type="button" value="<%=btn_confirm%>"
+			<h3> ${page_input}</h3>
+			<input type="button" value="${btn_confirm}"
 				onclick="confirmid()" class="button">
 		</div>
 		<input type="text" name="id" maxlength=20 autofocus
-			class="input" placeholder="<%=str_id%>">
+			class="input" placeholder="${str_id}">
 		<input type="password" name="passwd" maxlength=30
-			class="input" placeholder="<%=str_passwd%>">
+			class="input" placeholder="${str_passwd}">
 		<input type="password" name="repasswd" maxlength=30
 			class="input" placeholder="PASSWORD CONFIRM">
 		<input type="text" name="name" maxlength=30
-			class="input" placeholder="<%=str_name%>">
+			class="input" placeholder="${str_name}">
 		<div class="wrap">
 			<input type="text" name="birth" maxlength=6 onkeyup="nextbirth()"
 				class="input ssn" placeholder="BIRTH">
@@ -33,7 +33,7 @@
 		</div>	
 		<div class="wrap">
 			<input type="text" name="tel1" maxlength=3 onkeyup="nexttel1()"
-				class="input tel" placeholder="<%=str_tel%>">
+				class="input tel" placeholder="${str_tel}">
 				- <input type="text" name="tel2" maxlength=4 onkeyup="nexttel2()"
 					class="input tel">
 				- <input type="text" name="tel3" maxlength=4 onkeyup="nexttel3()"
@@ -41,7 +41,7 @@
 		</div>
 		<div class="wrap">
 			<input type="text" name="email_id" maxlength=15
-				class="input email" placeholder="<%=str_email%>">
+				class="input email" placeholder="${str_email}">
 				@
 				<select name="email_prov">
 					<option value=0>입력</option>
@@ -52,9 +52,9 @@
 				</select>
 		</div>
 		<div class="wrap">
-			<input type="submit" value="<%=btn_input%>" class="button">
-			<input type="reset" value="<%=btn_cancel%>" class="button">
-			<input type="button" value="<%=btn_home%>"
+			<input type="submit" value="${btn_input}" class="button">
+			<input type="reset" value="${btn_cancel}" class="button">
+			<input type="button" value="${btn_home}"
 				onclick="location='main.do'" class="button">
 		</div>
 	</div>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="setting.jsp"%>
-<link href="<%=project%>/style_member.css" rel="stylesheet" type="text/css">
+<link href="${project}/style_member.css" rel="stylesheet" type="text/css">
 
-<%=request.getAttribute("result")%>
+<%--=request.getAttribute("result")--%>
+${result}
