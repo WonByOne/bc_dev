@@ -40,7 +40,44 @@
 				}
 			);
 			// JSON with each
+			var z = [
+				{name:"홍길동", age:20},
+				{name:"이순신", age:30},
+				{name:"김유신", age:40}
+			]
+			$.each( 
+				z,
+				function( index, item ) {
+					msg += "이름 : " + item.name + "<br>"
+						+ "나이 : " + this.age + "<br>";
+				}
+			);
 			
+			// $(selector).each( function( index, item ) {} )
+			$("h4").each( 
+				function( index, item ) {
+					msg += index + " : " + $(item).text() + "<br>"; 	
+				}			
+			);
+			$("h4").each(
+				function( index ) {
+					msg += $(this).text() + "&nbsp;";					
+				}		
+			);
+			msg += "<br>";
+			
+			$("h4").each( 
+				function( index, item ) {
+					if( index % 2 == 0 ) $(item).css( "color", "darkred" );
+				}		
+			);
+			
+			var color = ["darkred", "darkblue", "darkgreen", "gold"];
+			$("h4").each(
+				function( index, item ) {
+					$(item).css( "color", color[index] );
+				}		
+			);
 			
 			$("#result").html(msg);
 		}
