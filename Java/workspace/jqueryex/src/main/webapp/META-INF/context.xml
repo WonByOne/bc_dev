@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<!-- Oracle DB local connection -->
+	<Resource name="jdbc/joeun" 
+		auth="Container"						
+		type="javax.sql.DataSource"				
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		loginTimeout="10"		
+		maxWait="5000"
+		username="joeun"
+		password="joeun"
+		testOnBorrow="true"
+		url="jdbc:oracle:thin:@localhost:1521:xe"
+	/>
+	<!-- Oracle Cloud Instance connection -->
+	<Resource name="OCI/joeun" 
+		auth="Container"						
+		type="javax.sql.DataSource"				
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		loginTimeout="10"		
+		maxWait="5000"
+		username="joeun"
+		password="Reccos@52525"
+		testOnBorrow="true"
+		url="jdbc:oracle:thin:@db202203302133_high?TNS_ADMIN=c://wallet/"
+		urlx="jdbc:oracle:thin:@db202203302133_high?TNS_ADMIN=/users/oeo/wallet/"
+	/>
+</context>
