@@ -1,0 +1,16 @@
+body
+{
+	background-color : black;
+	font-family:verdana;
+	color: #d6d6d6;
+}
+
+input {
+	background-color : grey;
+	color: #d6d6d6;
+}
+
+textarea {
+	background-color : transparent;
+	color: #d6d6d6;
+}
