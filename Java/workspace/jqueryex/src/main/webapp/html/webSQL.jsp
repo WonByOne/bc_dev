@@ -130,7 +130,48 @@
 				}
 			);
 			// 수정
-			
+			$("input[value=Modify]").on(
+				"click",
+				function(event) {
+					var name = $("input[name=name]").val();
+					var age = $("input[name=age]").val();
+					var tel = $("input[name=tel]").val();
+					var addr = $("input[name=addr]").val();
+					
+					if(name && age) {
+						db.transaction(
+							function(tx) {
+								tx.executeSql(
+									"select * from member where name=?",
+									[name],
+									function(tx, rs) {
+										if(rs.rows.length == 0) { 	// 이름 없음
+											$("#console").html("No such name.");
+										}  else {					// 이름 있음
+											db.transaction(
+												function(tx) {
+													tx.executeSql(
+														"update member set age=?, tel=?, address=? where name=?",
+														[age, tel, addr, name]
+													);
+												},
+												function(error) {
+													$("#console").html("Failed to modify : "+error.message);
+												},
+												function() {
+													$("#console").html("Modification Complete.")
+												}
+											);
+										}
+									}
+								);
+							}	
+						);
+					} else {
+						$("#console").html("Enter ID & Age");
+					}
+				}
+			);
 		}		
 	);
 	
