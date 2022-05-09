@@ -6,11 +6,15 @@ body
 }
 
 input {
-	background-color : grey;
+	background-color : #2e2e2e;
 	color: #d6d6d6;
 }
 
 textarea {
 	background-color : transparent;
+	color: #d6d6d6;
+}
+
+placeholder {
 	color: #d6d6d6;
 }
