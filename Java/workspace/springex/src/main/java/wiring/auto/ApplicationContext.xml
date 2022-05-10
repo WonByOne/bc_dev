@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-4.3.xsd">	
+	<!-- 
+	<bean id="instrument" class="wiring.auto.Piano"/>
+	<bean id="guitar" class="wiring.auto.Guitar"/>
+	<bean id="drum" class="wiring.auto.Drum"/>
+	<bean id="hong" class="wiring.auto.Instrumentalist" autowire="byName">
+		<property name="song" value="돌덩이"/>
+
+	</bean>  -->
+
+	<!--  By type
+	<bean id="piano" class="wiring.auto.Piano" primary="true"/>
+	<bean id="guitar" class="wiring.auto.Guitar" primary="false"/>
+	<bean id="drum" class="wiring.auto.Drum" primary="false"/>
+	<bean id="hong" class="wiring.auto.Instrumentalist" autowire="byType">
+		<property name="song" value="돌덩이"/>
+	</bean>	 -->
+	
+	<!-- candidate
+	<bean id="piano" class="wiring.auto.Piano" autowire-candidate="false"/>
+	<bean id="guitar" class="wiring.auto.Guitar" autowire-candidate="false"/>
+	<bean id="drum" class="wiring.auto.Drum"/>
+	<bean id="hong" class="wiring.auto.Instrumentalist" autowire="byType">
+		<property name="song" value="돌덩이"/>
+	</bean>  -->
+	
+	<!-- 생성자 구현 했을 때 생성 auto wiring -->
+	<bean id="piano" class="wiring.auto.Piano" autowire-candidate="false"/>
+	<bean id="guitar" class="wiring.auto.Guitar" autowire-candidate="false"/>
+	<bean id="drum" class="wiring.auto.Drum"/>
+	
+	<bean id="hong" class="wiring.auto.Instrumentalist" autowire="constructor">
+		<constructor-arg value="돌덩이"/>
+	</bean>
+	
+	
+	
+	<bean id="stone" class="wiring.auto.Stone"/>
+	<bean id="close" class="wiring.auto.Close" autowire-candidate="false"/>
+	
+	<bean id="singer" class="wiring.auto.Singer" autowire="constructor">
+		<constructor-arg value="하현우"/>
+	
+	</bean>
+	
+	
+	
+</beans>
