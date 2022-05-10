@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">	
+	<!-- DI 종속 객체 주입 -->					
+	<!-- 
+	<bean id="hong" class="wiring.bean.Juggler"/>  -->
+	<!-- Juggler hong = new Juggler() 와 같은 의미 객체 생성 -->
+		
+	<!-- Constructor Wiring -->
+	<bean id="picnic" class="wiring.bean.Picnic"/> <!-- 디폴트로 생성 -->
+	<bean id="flower" class="wiring.bean.Flower"/>
+	<!-- 
+	<bean id="hong" class="wiring.bean.PoeticJuggler">
+		<constructor-arg value="5"/>
+		<constructor-arg ref="picnic"/>
+	</bean>  -->			
+	
+	<!--factory method -->
+	<bean id="stage" class="wiring.bean.Stage"
+		factory-method="getInstance"/>
+	
+	<!-- singleton / prototype -->
+	<bean id="ticket" class="wiring.bean.Ticket" scope="prototype"/>
+	
+	<!-- 빈 초기화와 정리 method 아래 정의만으로 생성되면서 turnOnLights 실행 -->
+	<bean id="auditorium" class="wiring.bean.Auditorium"
+		init-method="turnOnLights" destroy-method="turnOffLights"/>
+	
+	<!--  Property Wiring -->
+	<bean id="piano" class="wiring.bean.Piano"/>
+	<bean id="guitar" class="wiring.bean.Guitar"/>
+	<bean id="drum" class="wiring.bean.Drum"/>
+	
+	<!--  변수 명 잡아서 객체 생성  
+	<bean id="hong" class="wiring.bean.Instrumentalist">
+		<property name="song" value="돌덩이"/>
+		<property name="instrument" ref="piano"/>
+	</bean>  -->
+	
+	<!-- 자바코드
+		Piano piano = new Piano();
+		Instrumentalist hong = new Instrumentalist();
+		hong.setSong("돌덩이");
+		hong.setInstrument(piano);
+	 -->
+	
+ 	<!-- 임시 객체 생성
+	 <bean id="hong" class="wiring.bean.Instrumentalist">
+	 	<property name="song" value="Close to you"/>
+	 	<property name="instrument">
+	 		<bean class="wiring.bean.Piano"/>
+	 	</property>
+	 </bean> -->
+	 
+	 <!-- 자바코드
+	 	Instrumental hong = new Instrumentalist();
+	 	hong.setSong("Close to you");
+	 	hong.setInstrument(new Piano());
+	  -->
+	<!-- 더 간단하게 p - name space 
+	<bean id="hong" class="wiring.bean.Instrumentalist"
+		p:song="Close to you" p:instrument-ref="drum"/>  -->
+	 
+	<!--  collection wiring  
+	<bean id="hong" class="wiring.bean.OneManBand">
+		<property name="song" value="돌덩이"/>
+		<property name="instruments">
+			<set>
+				<ref bean="piano"/>
+				<ref bean="guitar"/>
+				<ref bean="drum"/>
+				<ref bean="drum"/>
+			</set>
+		</property>
+	</bean> -->
+	
+	<bean id="hong" class="wiring.bean.TwoManBand">
+		<property name="song" value="돌덩이"/>
+		<property name="instruments">
+			<map>
+				<entry key="PIANO" value-ref="piano"/>
+				<entry key="GUITAR" value-ref="guitar"/>
+				<entry key="DRUM" value-ref="drum"/>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 연습 -->
+	<bean id="stone" class="wiring.bean.Stone"/>
+	<bean id="close" class="wiring.bean.Close"/>
+	<!--  
+	<bean id="singer" class="wiring.bean.Singer">
+		<constructor-arg value="하현우"/>
+		<constructor-arg ref="stone"/>
+	</bean>  -->	
+	
+	<!-- property 이용하면 디폴트 생성자 이용한다 
+	<bean id="singer" class="wiring.bean.Singer">
+		<property name="name" value="하현우"/>
+		<property name="song" ref="stone"/>
+	</bean>  -->
+	
+	<!-- 
+	<bean id="singer" class="wiring.bean.Singer"
+	 	p:name="하현우" p:song-ref="stone"/>  -->
+	 	
+	<bean id="singer" class="wiring.bean.Singer">
+		<property name="name" value="하현우"/>
+		<property name="songs">
+			<list>
+				<ref bean = "stone"/>
+				<ref bean = "close"/>
+			</list>
+		</property>
+		<property name="instruments">
+			<map>
+				<entry key="PIANO" value-ref="piano"/>
+				<entry key="GUITAR" value-ref="guitar"/>
+				<entry key="DRUM" value-ref="drum"/>
+			</map>
+		</property>
+	</bean> 
+</beans>
+
+
+
+
+
+
+
+
