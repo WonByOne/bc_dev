@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">	
+						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-4.3.xsd">	
+	
+	<util:list id="cities">
+		<bean class="wiring.spel.City">
+			<property name="name" value="#{'서울'}"/>
+			<property name="state" value="#{'경기'}"/>
+			<property name="population" value="#{1000}"/> 
+		</bean>
+		<bean class="wiring.spel.City" p:name="수원" p:state="경기" p:population="100"/>
+		<bean class="wiring.spel.City" p:name="인천" p:state="경기" p:population="400"/>
+		<bean class="wiring.spel.City" p:name="안산" p:state="경기" p:population="100"/>
+	</util:list>
+	
 	
 	<!--SPEL  str은 getStr의 get을 뺀 나머지로 맞춰야 함  -->
 	<bean id="props" class="wiring.spel.Props">
-		<property name="str" value="홍길동"/> 
+		<!-- property name="str" value="홍길동"/--> 
+		<!-- property name="str" value="#{5}"/-->
+		<!-- property name="str" value="#{5.5}"/-->
+		<!-- property name="str" value="#{'ABC'}"/-->
+		<!-- property name="str" value='#{"ABC"}'/-->
+		<!-- property name="str" value="#{ABC}"/--> 	<!-- 에러 -->
+		<!-- property name="str" value="입력하신 값은 #{5}"/-->
+		<!-- property name="str" value="#{true}"/--> 	<!--boolean -->
+		<!-- property name="str" value="#{'5+2'}"/--> 	<!-- 문자열 -->
+		<!-- property name="str" value="#{'5'+'2'}"/-->	<!-- 문자열 -->
+		<!-- property name="str" value="#{'5'+2}"/-->	<!-- 문자열 -->
+		<!-- property name="str" value="#{5+2}"/-->		<!-- 연산 -->
+		<!-- property name="str" value="#{'5'-'2'}"/--> <!-- 에러 -->
+		<!-- property name="str" value="#{5/2}"/-->		<!-- 정수 -->
+		<!-- property name="str" value="#{5^2}"/-->		<!-- 제곱 -->
+		<!-- property name="str" value="#{5 gt 2}"/--> 	<!-- gt lt ge le eq ne -->
+		<!-- property name="str" value="#{true && true}"/-->	<!-- error -->
+		<!-- property name="str" value="#{true and true}"/--> 	<!-- or -->
+		<!-- property name="str" value="#{5%2==0 ? '짝수' : '홀수'}"/-->
+		<!-- Elvis 연산자 null check 
+		<property name="str" value="#{singer.name ne null ? singer.name : '김유신'}"/-->
+		<!-- property name="str" value="#{singer.name ?: '김유신'}"/-->
+		
+		<!-- 객체 멤버 함수 호출 -->
+		<!-- property name="str" value="#{singer.getName()}"/-->
+		<!-- property name="str" value="#{singer.name}"/-->
+		<!-- prop.setStr(singer.getName()) -->
+		
+		<!-- 자바 클래스 사용 -->
+		<!-- property name="str" value="#{r.nextInt(45) + 1}"/-->
+		
+		<!-- static -->
+		<!-- property name="str" value="#{T(java.lang.Math).PI}"/-->
+		<!-- property name="str" value="#{T(java.lang.Math).random() * 100}"/-->
+		
+		<!-- property name="str" value="#{cities[0].name}"/-->
+		<property name="str" value="#{cities[3].population}"/>
+		
 	</bean>
+	<bean id="r" class="java.util.Random"/>
 	
+	<bean id="singer" class="wiring.spel.Singer">
+		<property name="name" value="홍길동 "/>
+	</bean>
 </beans>
-
-
-
-
-
-
-
-
