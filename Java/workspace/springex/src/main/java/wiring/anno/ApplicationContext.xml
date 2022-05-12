@@ -3,21 +3,38 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 						http://www.springframework.org/schema/util
-						http://www.springframework.org/schema/util/spring-util-4.3.xsd">	
+						http://www.springframework.org/schema/util/spring-util-4.3.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
-	<bean id="piano" class="wiring.anno.Piano" autowire-candidate="false"/>
-	<bean id="guitar" class="wiring.anno.Guitar" autowire-candidate="false"/>
+	<context:annotation-config/>
+	
+	<bean id="piano" class="wiring.anno.Piano"/>
+	<bean id="guitar" class="wiring.anno.Guitar"/>
+		<!-- <qualifier value="stringed"/>	qualifier 를 이용한 annotation -->
+		<!-- xml을 줄이기 위해 자바 class에 선언하는 경우가 더 많음 -->
 	<bean id="drum" class="wiring.anno.Drum"/>
-	<bean id="hong" class="wiring.anno.Instrumentalist" autowire="byType">
-		<property name="song" value="돌덩이"/>
-	</bean>
+	<!-- bean id="hong" class="wiring.anno.Instrumentalist"/-->
+		<!-- property name="song" value="돌덩이"/-->
 	
 	<bean id="stone" class="wiring.anno.Stone"/>
-	<bean id="close" class="wiring.anno.Close" autowire-candidate="false"/>
-	<bean id="singer" class="wiring.anno.Singer" autowire="byType">
-		<property name="name" value="하현우"/>
-	</bean>
+	<bean id="close" class="wiring.anno.Close"/>
+	<bean id="singer" class="wiring.anno.Singer"/>
+		<!-- property name="name" value="하현우"/-->
+		
+	<util:list id="songs">
+		<ref bean="stone"/>
+		<ref bean="close"/>
+	</util:list>
+	<util:map id="instruments">
+		<entry key="PIANO" value-ref="piano"/>
+		<entry key="GUITAR" value-ref="guitar"/>
+		<entry key="DRUM" value-ref="drum"/>
+	</util:map>
+	
+	<bean id="hong" class="wiring.anno.TwoManBand"/> 
 </beans>

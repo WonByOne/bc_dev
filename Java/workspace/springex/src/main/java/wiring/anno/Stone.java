@@ -1,5 +1,8 @@
 package wiring.anno;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+
+@Qualifier("rock")
 public class Stone implements Song {
 	@Override
 	public void singing() throws PerformanceException {
