@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- context:annotation-config/ 아래 component-scan에 다 포함-->
+	<!-- include-filter 각 class에 추가한 annotation 지울 수 있음
+	 	annotation 있어도 충돌이 나는 건 아님 -->
+	<context:component-scan base-package="wiring.scan">
+		<context:include-filter type="assignable" expression="wiring.scan.Role"/>
+		<context:include-filter type="assignable" expression="wiring.scan.Performer"/>
+		<context:include-filter type="assignable" expression="wiring.scan.Instrument"/>
+		<context:include-filter type="assignable" expression="wiring.scan.Song"/>
+	</context:component-scan>
+	
+	<!--
+	<bean id="student" class="wiring.scan.Student"/>
+	<bean id="company" class="wiring.scan.Company"/>
+	<bean id="teacher" class="wiring.scan.Teacher"/>
+	<bean id="hong" class="wiring.scan.Actor"/>
+	
+	<bean id="piano" class="wiring.scan.Piano"/>
+	<bean id="guitar" class="wiring.scan.Guitar"/>
+	<bean id="drum" class="wiring.scan.Drum"/>
+	
+	<bean id="stone" class="wiring.scan.Stone"/>
+	<bean id="close" class="wiring.scan.Close"/>
+	<bean id="singer" class="wiring.scan.Singer"/-->
+
+</beans>
